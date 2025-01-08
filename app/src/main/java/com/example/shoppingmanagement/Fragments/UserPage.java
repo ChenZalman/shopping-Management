@@ -3,6 +3,8 @@ package com.example.shoppingmanagement.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.shoppingmanagement.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserPage#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class UserPage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -36,9 +34,15 @@ public class UserPage extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment UserPage.
+     * @return A new instance of fragment CalenderFragment.
      */
     // TODO: Rename and change types and number of parameters
+
+    private ArrayList<DataModel> dataSet;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private ItemAdapter adapter;
+
     public static UserPage newInstance(String param1, String param2) {
         UserPage fragment = new UserPage();
         Bundle args = new Bundle();
@@ -55,12 +59,37 @@ public class UserPage extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_page, container, false);
+        View view = inflater.inflate(R.layout.UserPage, container, false);
+
+        dataSet = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.resView);
+        layoutManager = new LinearLayoutManager(requireContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        // Populate the dataSet
+        for (int i = 0; i < myData.nameArray.length; i++) {
+            dataSet.add(new DataModel(
+                    myData.nameArray[i],
+                    myData.versionArray[i],
+                    myData.drawableArray[i],
+                    myData.id_[i]
+            ));
+        }
+
+        // Set up the adapter
+        adapter = new ItemAdapter(dataSet);
+        recyclerView.setAdapter(adapter);
+
+        // Return the modified view
+        return view;
     }
 }
