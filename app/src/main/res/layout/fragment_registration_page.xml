@@ -18,6 +18,19 @@
             android:layout_gravity="center"
             android:textStyle="bold"/>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+            <EditText
+                android:id="@+id/etNameRegistration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -25,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp">
         <EditText
-            android:id="@+id/enterEmailTextBox"
+            android:id="@+id/etEmailRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -39,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp">
         <EditText
-            android:id="@+id/enterPasswordTextBox"
+            android:id="@+id/etPasswordRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -68,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp">
         <EditText
-            android:id="@+id/enterPhoneTextBox"
+            android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
