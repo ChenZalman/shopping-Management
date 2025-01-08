@@ -19,7 +19,11 @@
             android:textStyle="bold"/>
 
 
-
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
         <EditText
             android:id="@+id/enterEmailTextBox"
             android:layout_width="match_parent"
@@ -27,8 +31,13 @@
             android:ems="10"
             android:inputType="textEmailAddress"
             android:text="Email"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
         <EditText
             android:id="@+id/enterPasswordTextBox"
             android:layout_width="match_parent"
@@ -36,7 +45,14 @@
             android:ems="10"
             android:inputType="text"
             android:text="Password" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
         <EditText
             android:id="@+id/reEnterPasswordTextBox"
             android:layout_width="match_parent"
@@ -44,7 +60,13 @@
             android:ems="10"
             android:inputType="text"
             android:text="Re-enter Password" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
         <EditText
             android:id="@+id/enterPhoneTextBox"
             android:layout_width="match_parent"
@@ -52,7 +74,7 @@
             android:ems="10"
             android:inputType="phone"
             android:text="Phone Number"/>
-
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/RegisterButton"
             android:layout_width="match_parent"
