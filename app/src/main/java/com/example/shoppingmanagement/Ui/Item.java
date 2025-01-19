@@ -5,6 +5,11 @@ public class Item {
     private String name;
     private int amount;
     private int image;
+    public Item(String name, String version, int image, int id_) {
+        this.name = name;;
+        this.image = image;
+        this.amount = amount;
+    }
 
     public int getImage() {
         return image;

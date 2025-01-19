@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.shoppingmanagement.Activities.MainActivity;
 import com.example.shoppingmanagement.R;
 
 /**
@@ -36,7 +39,7 @@ public class RegistrationPage extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment RegistrationPage.
+     * @return A new instance of fragment RegistrationFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static RegistrationPage newInstance(String param1, String param2) {
@@ -61,6 +64,44 @@ public class RegistrationPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registration_page, container, false);
+        View view =  inflater.inflate(R.layout.fragment_registration_page, container, false);
+
+        /*Button button1 = view.findViewById(R.id.RegisterButton);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_registrationFragment_to_mainScreenFragment);
+            }
+        });*/
+
+        EditText emailRegistrationText = view.findViewById(R.id.etEmailRegistration);
+        String registerEmailStr = emailRegistrationText.getText().toString();
+
+        EditText passwordRegistrationText = view.findViewById(R.id.etPasswordRegistration);
+        String registerPasswordStr = passwordRegistrationText.getText().toString();
+
+        EditText reEnterPasswordRegistrationText = view.findViewById(R.id.reEnterPasswordTextBox);
+        String registerReEnterPasswordStr = reEnterPasswordRegistrationText.getText().toString();
+
+        EditText phoneNumberRegistrationText = view.findViewById(R.id.etPhoneNumber);
+        String registerPhoneNumberStr = phoneNumberRegistrationText.getText().toString();
+
+        EditText NameRegistrationText = view.findViewById(R.id.etNameRegistration);
+        String nameText = NameRegistrationText.getText().toString();
+
+        Button button = view.findViewById(R.id.RegisterButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainAct = (MainActivity) getActivity();
+                mainAct.register(v);
+            }
+        });
+
+
+
+
+        return view;
+
     }
 }
