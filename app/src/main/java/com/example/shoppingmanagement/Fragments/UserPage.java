@@ -3,6 +3,7 @@ package com.example.shoppingmanagement.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.shoppingmanagement.R;
+import com.example.shoppingmanagement.Ui.Item;
+import com.example.shoppingmanagement.Ui.ItemAdapter;
+
+import java.util.ArrayList;
 
 
 public class UserPage extends Fragment {
@@ -28,17 +33,6 @@ public class UserPage extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CalenderFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-
-    private ArrayList<DataModel> dataSet;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
@@ -67,17 +61,26 @@ public class UserPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.UserPage, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_page, container, false);
 
-        dataSet = new ArrayList<>();
-        recyclerView = view.findViewById(R.id.resView);
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment CalenderFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        ArrayList<Item> dataSet = new ArrayList<>();
+        //recyclerView = view.findViewById(R.id.ibAddItem);
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         // Populate the dataSet
         for (int i = 0; i < myData.nameArray.length; i++) {
-            dataSet.add(new DataModel(
+            dataSet.add(new Item(
                     myData.nameArray[i],
                     myData.versionArray[i],
                     myData.drawableArray[i],

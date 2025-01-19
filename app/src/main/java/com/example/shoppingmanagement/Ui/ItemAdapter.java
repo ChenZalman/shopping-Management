@@ -14,8 +14,11 @@ import com.example.shoppingmanagement.R;
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
-
     private ArrayList<Item> dataSet;
+    public ItemAdapter(ArrayList<Item> dataSet) {
+        this.dataSet = dataSet;
+    }
+
     private RecyclerViewListener listener;
 
     public ItemAdapter(ArrayList<Item> dataSet, RecyclerViewListener listener) {
