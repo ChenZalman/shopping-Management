@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.shoppingmanagement.R;
 import com.example.shoppingmanagement.Ui.Item;
 import com.example.shoppingmanagement.Ui.ItemAdapter;
+import com.example.shoppingmanagement.data.myData;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,7 @@ public class UserPage extends Fragment {
          */
         // TODO: Rename and change types and number of parameters
         ArrayList<Item> dataSet = new ArrayList<>();
-        //recyclerView = view.findViewById(R.id.ibAddItem);
+        recyclerView = view.findViewById(R.id.resView);
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

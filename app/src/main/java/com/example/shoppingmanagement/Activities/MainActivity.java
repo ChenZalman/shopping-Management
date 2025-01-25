@@ -1,6 +1,7 @@
 package com.example.shoppingmanagement.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -79,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
                             Navigation.findNavController(view).navigate(R.id.action_registrationPage_to_homePage);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(MainActivity.this, "Register failed!!!!!!!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Registration Failed!!!", Toast.LENGTH_LONG).show();
+                            Log.d("createUserWithEmail:failure", task.getException().toString());
 
                         }
                     }
@@ -93,9 +96,19 @@ public class MainActivity extends AppCompatActivity {
         EditText password = ((EditText) findViewById(R.id.etPasswordRegistration));
         //get data from the layout or register (for now)
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users").child(phone.getText().toString());
+        DatabaseReference myRef = database.getReference("users").child(email.getText().toString().replace('.','_'));
 
-        User s = new User(name.getText().toString(),email.getText().toString(),password.getText().toString() ,phone.getText().toString());
-        myRef.setValue(s);
+        User user = new User(name.getText().toString(),email.getText().toString(),password.getText().toString() ,phone.getText().toString());
+        myRef.setValue(user);
     }
+
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+////            Navigation.findNavController(view).navigate(R.id.action_registrationPage_to_homePage);/
+//        }
+//    }
 }

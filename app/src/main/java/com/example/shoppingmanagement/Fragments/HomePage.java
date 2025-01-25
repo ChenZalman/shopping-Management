@@ -3,11 +3,15 @@ package com.example.shoppingmanagement.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.shoppingmanagement.Activities.MainActivity;
 import com.example.shoppingmanagement.R;
 
 /**
@@ -16,6 +20,12 @@ import com.example.shoppingmanagement.R;
  * create an instance of this fragment.
  */
 public class HomePage extends Fragment {
+
+    Button buttonRegister;
+    Button buttonLogin;
+    EditText email;
+    EditText password;
+    Bundle bundle;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +71,35 @@ public class HomePage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+        buttonRegister = view.findViewById(R.id.btnRegisterLogin);
+        buttonLogin = view.findViewById(R.id.btnLoginLogin);
+        email = view.findViewById(R.id.etEmailLogin);
+        password = view.findViewById(R.id.etPasswordLogin);
+        bundle = new Bundle();
+
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                bundle.putString("email", email.getText().toString());
+//                Toast.makeText(view.getContext(), bundle.getString("email"), Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(view).navigate(R.id.action_homePage_to_registrationPage);
+            }
+        });
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bundle.putString("email", email.getText().toString());
+//                Toast.makeText(view.getContext(), bundle.getString("email"), Toast.LENGTH_SHORT).show();
+                if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.login(view);
+//                    Navigation.findNavController(view).navigate(R.id.action_fragmentTwo_to_fragmentThree);
+                }
+            }
+        });
+
+        return view;
     }
 }

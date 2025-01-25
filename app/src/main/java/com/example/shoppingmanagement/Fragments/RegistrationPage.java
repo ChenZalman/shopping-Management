@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.shoppingmanagement.Activities.MainActivity;
 import com.example.shoppingmanagement.R;
@@ -93,8 +94,14 @@ public class RegistrationPage extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity mainAct = (MainActivity) getActivity();
-                mainAct.register(v);
+                if ((!emailRegistrationText.getText().toString().isEmpty()) &&
+                        (!passwordRegistrationText.getText().toString().isEmpty()) &&
+                        passwordRegistrationText.getText().toString().equals(reEnterPasswordRegistrationText.getText().toString())) {
+                    MainActivity mainAct = (MainActivity) getActivity();
+                    mainAct.register(v);
+                }else {
+                    Toast.makeText(requireContext(), "Please fill all fields according to hints!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
