@@ -102,13 +102,33 @@ public class MainActivity extends AppCompatActivity {
         myRef.setValue(user);
     }
 
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if(currentUser != null){
-////            Navigation.findNavController(view).navigate(R.id.action_registrationPage_to_homePage);/
-//        }
+//    public void addData() {
+//        EditText phone = ((EditText) findViewById(R.id.etPhoneNumber));
+//        EditText email = ((EditText) findViewById(R.id.etEmailRegistration));
+//        EditText name = ((EditText) findViewById(R.id.etNameRegistration));
+//        EditText password = ((EditText) findViewById(R.id.etPasswordRegistration));
+//
+//        // Get data from the layout or register (for now)
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference usersRef = database.getReference("users"); // Reference to the "users" node
+//
+//        // Create a unique key for the user (you can use phone number or a generated ID)
+//        String userId = phone.getText().toString().replace('.', '_');
+//
+//        // Create a reference to the user's data under the "users" node
+//        DatabaseReference userRef = usersRef.child(userId);
+//
+//        User user = new User(name.getText().toString(), email.getText().toString(), password.getText().toString(), phone.getText().toString());
+//        userRef.setValue(user); // Set the user data
+//        Toast.makeText(this, "User info added", Toast.LENGTH_SHORT).show();
 //    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+//            Navigation.findNavController(view).navigate(R.id.action_registrationPage_to_homePage);/
+        }
+    }
 }
