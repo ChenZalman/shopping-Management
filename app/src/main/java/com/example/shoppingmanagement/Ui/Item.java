@@ -5,7 +5,7 @@ public class Item {
     private String name;
     private int amount;
     private int image;
-    public Item(String name, String version, int image, int id_) {
+    public Item(String name, int amount, int image, int id_) {
         this.name = name;;
         this.image = image;
         this.amount = amount;

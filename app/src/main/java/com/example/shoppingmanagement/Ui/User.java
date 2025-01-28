@@ -1,5 +1,6 @@
 package com.example.shoppingmanagement.Ui;
 
+
 public class User {
 
     private String name;

@@ -3,6 +3,7 @@ package com.example.shoppingmanagement.Ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,17 +30,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public interface RecyclerViewListener{
         void onClick(View  view, int position);
         boolean onLongClick(View view, int position);
+        void onAddButtonClick(View view, int position);
+        void onRemoveButtonClick(View view, int position);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName;
+        TextView textCounter;
         ImageView imageView;
+        Button btnAdd;
+        Button btnRemove;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.tvName);
-
+            textCounter = itemView.findViewById(R.id.tvItemCounter);
             imageView = itemView.findViewById(R.id.ibItem);
+            btnAdd = itemView.findViewById(R.id.btnAdd);
+            btnRemove = itemView.findViewById(R.id.btnRemove);
+
         }
     }
 
@@ -56,12 +65,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.textViewName.setText(dataSet.get(position).getName());
         holder.imageView.setImageResource(dataSet.get(position).getImage());
-
+        holder.textCounter.setText(String.valueOf(dataSet.get(position).getAmount()));
+//        holder.textCounter.setText(0);
         holder.itemView.setOnClickListener(v -> listener.onClick(v, position));
         holder.itemView.setOnLongClickListener(v -> {
             listener.onLongClick(v, position);
             return true;
         });
+        holder.btnAdd.setOnClickListener(v -> listener.onAddButtonClick(holder.itemView, position));
+        holder.btnRemove.setOnClickListener(v -> listener.onRemoveButtonClick(holder.itemView, position));
     }
 
 

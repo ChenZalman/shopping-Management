@@ -81,8 +81,6 @@ public class HomePage extends Fragment {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                bundle.putString("email", email.getText().toString());
-//                Toast.makeText(view.getContext(), bundle.getString("email"), Toast.LENGTH_SHORT).show();
                 Navigation.findNavController(view).navigate(R.id.action_homePage_to_registrationPage);
             }
         });
@@ -91,11 +89,9 @@ public class HomePage extends Fragment {
             @Override
             public void onClick(View view) {
                 bundle.putString("email", email.getText().toString());
-//                Toast.makeText(view.getContext(), bundle.getString("email"), Toast.LENGTH_SHORT).show();
                 if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.login(view);
-//                    Navigation.findNavController(view).navigate(R.id.action_fragmentTwo_to_fragmentThree);
                 }
             }
         });
