@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shoppingmanagement.R;
+import com.example.shoppingmanagement.Ui.Cart;
 import com.example.shoppingmanagement.Ui.Item;
 import com.example.shoppingmanagement.Ui.ItemAdapter;
 import com.example.shoppingmanagement.Ui.User;
@@ -39,6 +40,8 @@ public class UserPage extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
+    private Cart cart;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,6 +72,8 @@ public class UserPage extends Fragment {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -85,7 +90,6 @@ public class UserPage extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         TextView tvName = view.findViewById(R.id.tvUserName);
-
         if (null != getArguments())
             mDatabase.child("users").child(getArguments().getString("email").replace('.', '_')).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
@@ -109,16 +113,37 @@ public class UserPage extends Fragment {
          */
         // TODO: Rename and change types and number of parameters
 
+        if (null != getArguments())
+            mDatabase.child("carts").child(getArguments().getString("email").replace('.', '_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        Log.e("firebase", "Error getting data", task.getException());
+                    } else {
+                        cart = task.getResult().getValue(Cart.class);
+                        //        // Populate the dataSet
+                        for (int i = 0; i < cart.getItems().size(); i++) {
+                            dataSet.add(new Item(
+                                    myData.nameArray[i],
+                                    cart.getQuantity((myData.nameArray[i])),
+                                    myData.drawableArray[i],
+                                    myData.id_[i]
+                            ));
+                        }
+                    }
+                    recyclerView.setAdapter(adapter);
+                }
+            });
 
-        // Populate the dataSet
-        for (int i = 0; i < myData.nameArray.length; i++) {
-            dataSet.add(new Item(
-                    myData.nameArray[i],
-                    0,
-                    myData.drawableArray[i],
-                    myData.id_[i]
-            ));
-        }
+////        // Populate the dataSet
+//        for (int i = 0; i < cart.getItems().size(); i++) {
+//            dataSet.add(new Item(
+//                    myData.nameArray[i],
+//                    cart.getQuantity((myData.nameArray[i])),
+//                    myData.drawableArray[i],
+//                    myData.id_[i]
+//            ));
+//        }
 
         // Set up the adapter
         adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
@@ -136,7 +161,9 @@ public class UserPage extends Fragment {
             public void onAddButtonClick(View view, int position) {
                 //Toast.makeText(requireContext(), "Add to number of items", Toast.LENGTH_SHORT).show();
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
+                TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
+                mDatabase.child("carts").child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
             }
 
@@ -144,12 +171,15 @@ public class UserPage extends Fragment {
             public void onRemoveButtonClick(View view, int position) {
                 //Toast.makeText(requireContext(), "Decrease to number of items", Toast.LENGTH_SHORT).show();
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
+                TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
-                if (counter > 0)
+                if (counter > 0) {
+                    mDatabase.child("carts").child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
+                }
             }
         });
-        recyclerView.setAdapter(adapter);
+//        recyclerView.setAdapter(adapter);
 
         // Return the modified view
         return view;

@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private final Map<String, Integer> items;
+    private Map<String, Integer> items;
     private String email;
 
     public Cart(String email) {
         this.items = new HashMap<>();
         this.email = email;
+    }
+
+    public Cart() {
     }
 
     public void addItem(String item, int quantity) {
