@@ -163,7 +163,7 @@ public class UserPage extends Fragment {
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
-                mDatabase.child("carts").child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
+                mDatabase.child("carts").child(getArguments().getString("email").replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
             }
 
@@ -174,7 +174,7 @@ public class UserPage extends Fragment {
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 if (counter > 0) {
-                    mDatabase.child("carts").child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
+                    mDatabase.child("carts").child(getArguments().getString("email").replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
                 }
             }
